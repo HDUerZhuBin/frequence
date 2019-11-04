@@ -1,0 +1,19 @@
+reference:
+https://zh.wikipedia.org/wiki/%E6%A2%85%E5%B0%94%E9%A2%91%E7%8E%87%E5%80%92%E8%B0%B1%E7%B3%BB%E6%95%B0
+
+MFCC(Mel-Frequency Cepstrum)梅尔频率倒谱
+target:用于语音识别方面的特征提取（提取相关梅尔频率特征）
+
+the process of MFCC:
+1.split the voice_signal into different windows;
+2.analyse each voice_signal window:
+2.1 fft(voice_signal window,fs,n_fft):convert the voice_signal into the energy_distribution of diff freq;
+2.2 throw the diff_freq distris into the mel-freq,to get the mel-degree(将fft变换之后的频率分布结果放入梅尔滤波器进行滤波，得到梅尔刻度)
+这里是有20个滤波器构成的滤波器组，得到20个不同梅尔频段的滤波结果
+2.3 对滤波器得到的刻度对应的能量值进行计算，得到对数能量;
+2.4 将计算得到的若干个梅尔频谱能量序列进行ifft逆变换，转换为倒频谱域结果；
+2.5 取12个频段的ifft能量逆变换结果，外加原始窗口信号，构建特征矩阵。
+
+result:
+最后得到13维特征的特征矩阵。
+
